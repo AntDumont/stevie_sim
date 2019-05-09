@@ -13,7 +13,8 @@
 	<xacro:property name="upper_body_height" value="0.565"/>
 
 	<!--Adjust the world's Z axis-->
-	<xacro:property name="upper_body_y_adjustment" value="0.049"/>
+	<xacro:property name="hip_upper_body_joint_y_adjustment" value="0.0733"/>
+	<xacro:property name="upper_body_link_y_adjustment" value="-0.024"/>
 
 	<xacro:property name="PI" value="3.14159"/>
 
@@ -23,19 +24,19 @@
 		<!-- upper body link -->
 		<link name="${name}_link">
 			<collision>
-				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<origin xyz="0 ${upper_body_link_y_adjustment} 0" rpy="0 0 0"/>
 				<geometry>
 					<mesh filename="package://stevie_description/meshes/collision/upper_body_collision.STL" scale="0.001 0.001 0.001"/>
 				</geometry>
 			</collision>
 			<visual>
-				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<origin xyz="0 ${upper_body_link_y_adjustment} 0" rpy="0 0 0"/>
 					<geometry>
 				 		<mesh filename="package://stevie_description/meshes/visual/upper_body.STL" scale="0.001 0.001 0.001"/>
 					</geometry>
 			</visual>
 			<inertial>
-				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<origin xyz="0 ${upper_body_link_y_adjustment} 0" rpy="0 0 0"/>
 				<mass value="${upper_body_mass}"/>
 				<inertia ixx="182592012288.0000" ixy="1131537.1250" ixz="-3420374.2500" iyy="137232130048.0000" iyz="-56384828.0000" izz="183043080192.0000"/>
 			</inertial>
@@ -50,8 +51,8 @@
 
 		<!-- hip-upper_body joint -->
 		<joint name="hip_${name}_joint" type="revolute">
-			<origin xyz="0 ${upper_body_y_adjustment} 0" rpy="0 0 0"/>
-			<axis xyz="0 0 1"/>
+			<origin xyz="0 ${hip_upper_body_joint_y_adjustment} 0" rpy="0 0 0"/>
+			<axis xyz="1 0 0"/>
 			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			<parent link="hip_link"/>
 			<child link="${name}_link"/>

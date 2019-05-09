@@ -15,9 +15,10 @@
 
 	<!--Adjust world's Y axis-->
 	<xacro:property name="arm_x_adjustment" value="0.065"/>
-	<!--Adjust world's -Z axis-->
-	<xacro:property name="right_arm_y_adjustment" value="-0.05"/>
-	<xacro:property name="left_arm_y_adjustment" value="0.55"/>
+
+	<!--Adjust world's Z axis-->
+	<xacro:property name="arm_link_y_adjustment" value="0.2"/>
+
 
 	<xacro:property name="PI" value="3.14159"/>
 
@@ -64,13 +65,15 @@
 		<!-- shoulder-arm joint -->
 		<joint name="arm_${side}_joint" type="revolute">
 			<xacro:if value="${side == 'right'}">
-				<origin xyz="${arm_x_adjustment} ${right_arm_y_adjustment} 0" rpy="0 ${PI} ${PI}"/>
+				<origin xyz="${arm_x_adjustment} 0 0" rpy="0 ${PI} ${PI}"/>
+				<limit lower="0" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			</xacro:if>
 			<xacro:if value="${side == 'left'}">
-				<origin xyz="${arm_x_adjustment} ${left_arm_y_adjustment} 0" rpy="0 0 0"/>
+				<!--<origin xyz="${arm_x_adjustment} ${-upper_body_height + left_arm_y_adjustment} 0" rpy="0 0 0"/>-->
+				<origin xyz="${arm_x_adjustment} 0 0" rpy="0 0 0"/>
+				<limit lower="${-PI/4}" upper="0" effort="1000.0" velocity="0.5"/>
 			</xacro:if>
 			<axis xyz="0 0 1"/>
-			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			<parent link="shoulder_${side}_link"/>
 			<child link="arm_${side}_link"/>
 		</joint>

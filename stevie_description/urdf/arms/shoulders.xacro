@@ -46,7 +46,7 @@
 			<material>Gazebo/White</material>
 		</gazebo>
 
-		<!-- shoulder-arm joint -->
+		<!-- upper_body-shoulder joint -->
 		<joint name="shoulder_${side}_joint" type="revolute">
 			<xacro:if value="${side == 'right'}">
 				<origin xyz="${-upper_body_length/2 - shoulder_x_adjustment} ${upper_body_height + shoulder_y_adjustment} 0" rpy="${PI} ${PI} 0"/>
@@ -54,7 +54,7 @@
 			<xacro:if value="${side == 'left'}">
 				<origin xyz="${upper_body_length/2 + shoulder_x_adjustment} ${upper_body_height + shoulder_y_adjustment} 0" rpy="${PI} 0 0"/>
 			</xacro:if>
-			<axis xyz="0 0 1"/>
+			<axis xyz="1 0 0"/>
 			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			<parent link="${parent}"/>
 			<child link="shoulder_${side}_link"/>
