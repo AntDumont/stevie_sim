@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--
+	<xacro:include filename="$(find stevie_description)/urdf/wheel/wheel.transmission.xacro" />
+-->
+
+	<!-- DECLARE VARIABLES -->
+	<xacro:property name="arm_mass" value="1"/>
+	<xacro:property name="arm_length" value="0.124658905"/>
+	<xacro:property name="arm_width" value="0.1100"/>
+	<xacro:property name="arm_height" value="0.124658905"/>
+
+	<xacro:property name="PI" value="3.14159"/>
+
+	<!--************************        ARMS          ************************-->
+  <xacro:macro name="arm" params="parent side" >
+
+		<!-- arm link -->
+		<link name="arm_${side}_link">
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<xacro:if value="${side == 'right'}">
+						<mesh filename="package://stevie_description/meshes/collision/right_arm_collision.STL" scale="0.001 0.001 0.001"/>
+					</xacro:if>
+					<xacro:if value="${side == 'left'}">
+						<mesh filename="package://stevie_description/meshes/collision/left_arm_collision.STL" scale="0.001 0.001 0.001"/>
+					</xacro:if>
+				</geometry>
+			</collision>
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<xacro:if value="${side == 'right'}">
+						<mesh filename="package://stevie_description/meshes/visual/right_arm.STL" scale="0.001 0.001 0.001"/>
+					</xacro:if>
+					<xacro:if value="${side == 'left'}">
+						<mesh filename="package://stevie_description/meshes/visual/left_arm.STL" scale="0.001 0.001 0.001"/>
+					</xacro:if>
+				</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${arm_mass}"/>
+				<inertia ixx="14018668544.0000" ixy="2533231.2500" ixz="-2730643.5000" iyy="2866326016.0000" iyz="155359360.0000" izz="13486148608.0000"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="arm_${side}_link">
+			<material>Gazebo/White</material>
+		</gazebo>
+
+		<!-- shoulder-arm joint -->
+		<joint name="arm_${side}_joint" type="revolute">
+			<xacro:if value="${side == 'right'}">
+				<origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+			</xacro:if>
+			<xacro:if value="${side == 'left'}">
+				<origin xyz="0 0 0" rpy="0 0 ${-PI/2}"/>
+			</xacro:if>
+			<axis xyz="0 0 1"/>
+			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
+			<parent link="${parent}"/>
+			<child link="arm_${side}_link"/>
+		</joint>
+
+	</xacro:macro>
+	<!--***********************************************************************-->
+
+</robot>

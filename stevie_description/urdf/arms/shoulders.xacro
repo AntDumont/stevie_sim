@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--
+	<xacro:include filename="$(find stevie_description)/urdf/wheel/wheel.transmission.xacro" />
+-->
+<!--
+	<xacro:include filename="$(find stevie_description)/urdf/arms/arms.xacro" />
+-->
+	<!-- DECLARE VARIABLES -->
+	<xacro:property name="shoulder_mass" value="1"/>
+	<xacro:property name="shoulder_length" value="0.2130"/>
+	<xacro:property name="shoulder_width" value="0.115000381"/>
+	<xacro:property name="shoulder_height" value="0.1150"/>
+
+	<!--Adjust world's Z axis-->
+	<xacro:property name="shoulder_y_adjustment" value="-0.1465"/>
+	<!--Adjust world's Y axis-->
+	<xacro:property name="shoulder_x_adjustment" value="-0.04"/>
+
+	<xacro:property name="PI" value="3.14159"/>
+
+	<!--************************        SHOULDERS          ************************-->
+  <xacro:macro name="shoulder" params="parent side" >
+
+		<!-- shoulder link -->
+		<link name="shoulder_${side}_link">
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://stevie_description/meshes/collision/shoulder_collision.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</collision>
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://stevie_description/meshes/visual/shoulder.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${shoulder_mass}"/>
+				<inertia ixx="822072832.0000" ixy="-14428306.0000" ixz="7534.551758" iyy="1594399616.0000" iyz="-3097.950439" izz="1878856192.0000"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="shoulder_${side}_link">
+			<material>Gazebo/White</material>
+		</gazebo>
+
+		<!--*************   ARM     *************-->
+		<!--<xacro:arm parent="shoulder_${side}_link" side="${side}"/>-->
+
+		<!-- shoulder-arm joint -->
+		<joint name="shoulder_${side}_joint" type="revolute">
+			<xacro:if value="${side == 'right'}">
+				<origin xyz="${-upper_body_length/2 + shoulder_x_adjustment} ${upper_body_height + shoulder_y_adjustment} 0" rpy="${PI} ${PI} 0"/>
+			</xacro:if>
+			<xacro:if value="${side == 'left'}">
+				<origin xyz="${upper_body_length/2 + shoulder_x_adjustment} ${upper_body_height + shoulder_y_adjustment} 0" rpy="${PI} 0 0"/>
+			</xacro:if>
+			<axis xyz="0 0 1"/>
+			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
+			<parent link="${parent}"/>
+			<child link="shoulder_${side}_link"/>
+		</joint>
+
+	</xacro:macro>
+	<!--***********************************************************************-->
+
+</robot>

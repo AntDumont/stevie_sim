@@ -45,7 +45,7 @@
 			<material>Gazebo/White</material>
 		</gazebo>
 
-		<!--*****************      HIP        *****************-->
+		<!--*************   HIP     *************-->
 		<xacro:hip parent="${parent}"/>
 
 		<!-- hip-upper_body joint -->

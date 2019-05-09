@@ -25,10 +25,16 @@
 	<xacro:arm_ass side="right" reflect="1.0" arm_rotate="1.0" />
 -->
 
+  <xacro:property name="lower_body_name" value="lower_body"/>
+  <xacro:property name="upper_body_name" value="upper_body"/>
+
+
   <xacro:include filename="$(find stevie_description)/urdf/lower_body/lower_body.xacro" />
   <xacro:include filename="$(find stevie_description)/urdf/upper_body/upper_body.xacro" />
+  <xacro:include filename="$(find stevie_description)/urdf/arms/shoulders.xacro" />
 
-  <xacro:lower_body  name="lower_body"/>
-  <xacro:upper_body parent="lower_body_link" name="upper_body"/>
+  <xacro:lower_body  name="${lower_body_name}"/>
+  <xacro:upper_body parent="${lower_body_name}_link" name="${upper_body_name}"/>
+  <xacro:shoulder parent="${upper_body_name}_link" side="left"/>
 
 </robot>
