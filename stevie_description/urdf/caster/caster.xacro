@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--
+	<xacro:include filename="$(find stevie_description)/urdf/wheel/wheel.transmission.xacro" />
+-->
+
+	<!-- DECLARE VARIABLES -->
+	<xacro:property name="caster_mass" value="0.5"/>
+	<xacro:property name="caster_radius" value="0.133"/>
+
+	<xacro:property name="caster_x_adjustment" value="-0.3055"/>
+	<xacro:property name="caster_z_adjustment" value="-0.05"/>
+
+	<xacro:property name="PI" value="3.14159"/>
+
+	<!--**************   MOMENT OF INERTIA OF A SPHERE   **************-->
+	<macro name="sphere_inertia" params="m r">
+    <inertia  ixx="${2*m*r*r/5}" ixy="0" ixz="0"
+              iyy="${2*m*r*r/5}" iyz="0"
+              izz="${2*m*r*r/5}"
+    />
+  </macro>
+	<!--***************************************************************-->
+
+	<!--************************        CASTER          ************************-->
+  <xacro:macro name="caster" params="parent" >
+
+		<!-- caster link -->
+		<link name="caster_link">
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://stevie_description/meshes/collision/caster_collision.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</collision>
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://stevie_description/meshes/visual/caster.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${caster_mass}"/>
+				<xacro:sphere_inertia m="${caster_mass}" r="${caster_radius}"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="caster_link">
+			<mu1>0.0</mu1>
+			<mu2>0.0</mu2>
+			<material>Gazebo/Black</material>
+		</gazebo>
+
+		<!-- footprint-caster joint -->
+		<joint name="caster_joint" type="fixed">
+			<origin xyz="${caster_x_adjustment} 0 ${caster_z_adjustment}" rpy="${PI/2} 0 0"/>
+			<parent link="${parent}"/>
+			<child link="caster_link"/>
+		</joint>
+
+	</xacro:macro>
+	<!--***********************************************************************-->
+
+</robot>

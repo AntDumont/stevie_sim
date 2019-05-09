@@ -5,6 +5,7 @@
 	<xacro:include filename="$(find stevie_description)/urdf/lower_body/lower_body.transmission.xacro" />
 -->
 	<xacro:include filename="$(find stevie_description)/urdf/wheels/wheels.xacro" />
+	<xacro:include filename="$(find stevie_description)/urdf/caster/caster.xacro" />
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="lower_body_mass" value="0.27"/>
@@ -12,7 +13,7 @@
 	<xacro:property name="lower_body_width" value="0.516555237"/>
 	<xacro:property name="lower_body_height" value="0.475"/>
 
-	<xacro:property name="z_adjustment" value="-0.075"/>
+	<xacro:property name="lower_body_z_adjustment" value="-0.075"/>
 
 	<xacro:property name="PI" value="3.14159"/>
 
@@ -50,7 +51,7 @@
 
 		<!-- footprint-lower_body joint -->
 		<joint name="${name}_footprint_joint" type="fixed">
-			<origin xyz="0 0 ${z_adjustment}" rpy="${PI/2} 0 ${PI/2}"/>
+			<origin xyz="0 0 ${lower_body_z_adjustment}" rpy="${PI/2} 0 ${PI/2}"/>
 			<parent link="${name}_footprint"/>
 			<child link="${name}_link"/>
 		</joint>
@@ -58,6 +59,9 @@
 		<!--**************        WHEELS          **************-->
 		<xacro:wheel parent="${name}_footprint" side="right"/>
 		<xacro:wheel parent="${name}_footprint" side="left"/>
+
+		<!--**************        CASTER          **************-->
+		<xacro:caster parent="${name}_footprint"/>
 
 	</xacro:macro>
 	<!--***********************************************************************-->
