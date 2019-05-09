@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--
+	<xacro:include filename="$(find stevie_description)/urdf/lower_body/lower_body.transmission.xacro" />
+-->
+	<xacro:include filename="$(find stevie_description)/urdf/wheels/wheels.xacro" />
+
+	<!-- DECLARE VARIABLES -->
+	<xacro:property name="lower_body_mass" value="0.27"/>
+	<xacro:property name="lower_body_length" value="0.485903015"/>
+	<xacro:property name="lower_body_width" value="0.516555237"/>
+	<xacro:property name="lower_body_height" value="0.475"/>
+
+	<xacro:property name="z_adjustment" value="-0.075"/>
+
+	<xacro:property name="PI" value="3.14159"/>
+
+	<!--************************        LOWER BODY          ************************-->
+  <xacro:macro name="lower_body" params="name" >
+
+		<!-- base link -->
+		<link name="${name}_footprint" />
+
+		<!-- lower body link -->
+		<link name="${name}_link">
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://stevie_description/meshes/collision/lower_body_collision.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</collision>
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+					<geometry>
+				 		<mesh filename="package://stevie_description/meshes/visual/lower_body.STL" scale="0.001 0.001 0.001"/>
+					</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${lower_body_mass}"/>
+				<inertia ixx="405031911424.0000" ixy="-6338355.0000" ixz="1364738.3750" iyy="423088029696.0000" iyz="3831503104.0000" izz="255725256704.0000"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="${name}_link">
+			<material>Gazebo/White</material>
+		</gazebo>
+
+
+		<!-- footprint-lower_body joint -->
+		<joint name="${name}_footprint_joint" type="fixed">
+			<origin xyz="0 0 ${z_adjustment}" rpy="${PI/2} 0 ${PI/2}"/>
+			<parent link="${name}_footprint"/>
+			<child link="${name}_link"/>
+		</joint>
+
+		<!--**************        WHEELS          **************-->
+		<xacro:wheel parent="${name}_footprint" side="right"/>
+		<xacro:wheel parent="${name}_footprint" side="left"/>
+
+	</xacro:macro>
+	<!--***********************************************************************-->
+
+</robot>

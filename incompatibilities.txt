@@ -1,0 +1,3 @@
+In launch file :
+  Jade and before : <param name="robot_description" command="$(find xacro)/xacro.py '$(find stevie_description)/urdf/stevie.xacro'" />
+  after Jade : <param name="robot_description" command="$(find xacro)/xacro.py '$(find stevie_description)/urdf/stevie.xacro'" />
