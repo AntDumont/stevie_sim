@@ -15,12 +15,12 @@
 	<xacro:property name="PI" value="3.14159"/>
 
 	<!--**************   MOMENT OF INERTIA OF A SPHERE   **************-->
-	<macro name="sphere_inertia" params="m r">
+	<xacro:macro name="sphere_inertia" params="m r">
     <inertia  ixx="${2*m*r*r/5}" ixy="0" ixz="0"
               iyy="${2*m*r*r/5}" iyz="0"
               izz="${2*m*r*r/5}"
     />
-  </macro>
+  </xacro:macro>
 	<!--***************************************************************-->
 
 	<!--************************        CASTER          ************************-->

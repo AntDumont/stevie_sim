@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--
+	<xacro:include filename="$(find stevie_description)/urdf/hip/hip.transmission.xacro" />
+-->
+
+	<!-- DECLARE VARIABLES -->
+	<xacro:property name="hip_mass" value="0.1"/>
+	<xacro:property name="hip_length" value="0.320"/>
+	<xacro:property name="hip_width" value="0.095"/>
+	<xacro:property name="hip_height" value="0.3"/>
+
+	<!--Adjust on the world's X axis-->
+	<xacro:property name="hip_z_adjustment" value="-0.135"/>
+	<!--Adjust on the world's Z axis-->
+	<xacro:property name="hip_y_adjustment" value="-0.04"/>
+
+	<xacro:property name="PI" value="3.14159"/>
+
+	<!--************************        HIP          ************************-->
+  <xacro:macro name="hip" params="parent" >
+
+		<!-- hip link -->
+		<link name="hip_link">
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://stevie_description/meshes/collision/hip_upper_collision.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</collision>
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+					<geometry>
+				 		<mesh filename="package://stevie_description/meshes/visual/hip_upper.STL" scale="0.001 0.001 0.001"/>
+					</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${hip_mass}"/>
+				<inertia ixx="6483752960.0000" ixy="2350.257568" ixz="-355.673645" iyy="14856898560.0000" iyz="-228.070938" izz="9096541184.0000"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="hip_link">
+			<material>Gazebo/White</material>
+		</gazebo>
+
+
+		<!-- lower_body-hip joint -->
+		<joint name="hip_${parent}_joint" type="revolute">
+			<origin xyz="0 ${lower_body_height + hip_y_adjustment} ${hip_z_adjustment}" rpy="0 0 0"/>
+			<axis xyz="0 0 1"/>
+			<limit lower="-${PI/2}" upper="${PI/2}" effort="1000.0" velocity="0.5"/>
+			<parent link="${parent}"/>
+			<child link="hip_link"/>
+		</joint>
+
+	</xacro:macro>
+	<!--***********************************************************************-->
+
+</robot>
