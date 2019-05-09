@@ -26,9 +26,9 @@
 -->
 
   <xacro:include filename="$(find stevie_description)/urdf/lower_body/lower_body.xacro" />
-  <xacro:include filename="$(find stevie_description)/urdf/upper_body/hip.xacro" />
+  <xacro:include filename="$(find stevie_description)/urdf/upper_body/upper_body.xacro" />
 
   <xacro:lower_body  name="lower_body"/>
-  <xacro:hip parent="lower_body_link"/>
+  <xacro:upper_body parent="lower_body_link" name="upper_body"/>
 
 </robot>

@@ -4,53 +4,57 @@
 <!--
 	<xacro:include filename="$(find stevie_description)/urdf/hip/hip.transmission.xacro" />
 -->
-	<xacro:include filename="$(find stevie_description)/urdf/wheels/wheels.xacro" />
-	<xacro:include filename="$(find stevie_description)/urdf/caster/caster.xacro" />
+	<xacro:include filename="$(find stevie_description)/urdf/upper_body/hip.xacro" />
 
 	<!-- DECLARE VARIABLES -->
-	<xacro:property name="hip_mass" value="0.1"/>
-	<xacro:property name="hip_length" value="0.320"/>
-	<xacro:property name="hip_width" value="0.095"/>
-	<xacro:property name="hip_height" value="0.3"/>
+	<xacro:property name="upper_body_mass" value="8"/>
+	<xacro:property name="upper_body_length" value="0.347374786"/>
+	<xacro:property name="upper_body_width" value="0.283975830"/>
+	<xacro:property name="upper_body_height" value="0.565"/>
 
-	<xacro:property name="hip_z_adjustment" value="-0.075"/>
+	<!--Adjust the world's Z axis-->
+	<xacro:property name="upper_body_y_adjustment" value="0.049"/>
 
 	<xacro:property name="PI" value="3.14159"/>
 
-	<!--************************        LOWER BODY          ************************-->
-  <xacro:macro name="hip" params="parent" >
+	<!--************************        UPPER BODY          ************************-->
+  <xacro:macro name="upper_body" params="parent name" >
 
-		<!-- lower body link -->
-		<link name="hip_link">
+		<!-- upper body link -->
+		<link name="${name}_link">
 			<collision>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-					<mesh filename="package://stevie_description/meshes/collision/hip_collision.STL" scale="0.001 0.001 0.001"/>
+					<mesh filename="package://stevie_description/meshes/collision/upper_body_collision.STL" scale="0.001 0.001 0.001"/>
 				</geometry>
 			</collision>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 					<geometry>
-				 		<mesh filename="package://stevie_description/meshes/visual/hip.STL" scale="0.001 0.001 0.001"/>
+				 		<mesh filename="package://stevie_description/meshes/visual/upper_body.STL" scale="0.001 0.001 0.001"/>
 					</geometry>
 			</visual>
 			<inertial>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
-				<mass value="${hip_mass}"/>
-				<inertia ixx="6483752960.0000" ixy="2350.257568" ixz="-355.673645" iyy="14856898560.0000" iyz="-228.070938" izz="9096541184.0000"/>
+				<mass value="${upper_body_mass}"/>
+				<inertia ixx="182592012288.0000" ixy="1131537.1250" ixz="-3420374.2500" iyy="137232130048.0000" iyz="-56384828.0000" izz="183043080192.0000"/>
 			</inertial>
 		</link>
 
-		<gazebo reference="hip_link">
+		<gazebo reference="${name}_link">
 			<material>Gazebo/White</material>
 		</gazebo>
 
+		<!--*****************      HIP        *****************-->
+		<xacro:hip parent="${parent}"/>
 
-		<!-- footprint-hip joint -->
-		<joint name="hip_${parent}_joint" type="fixed">
-			<origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
-			<parent link="${parent}"/>
-			<child link="hip_link"/>
+		<!-- hip-upper_body joint -->
+		<joint name="hip_${name}_joint" type="revolute">
+			<origin xyz="0 ${upper_body_y_adjustment} 0" rpy="0 0 0"/>
+			<axis xyz="0 0 1"/>
+			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
+			<parent link="hip_link"/>
+			<child link="${name}_link"/>
 		</joint>
 
 	</xacro:macro>
