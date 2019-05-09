@@ -4,9 +4,7 @@
 <!--
 	<xacro:include filename="$(find stevie_description)/urdf/wheel/wheel.transmission.xacro" />
 -->
-<!--
-	<xacro:include filename="$(find stevie_description)/urdf/arms/arms.xacro" />
--->
+
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="shoulder_mass" value="1"/>
 	<xacro:property name="shoulder_length" value="0.2130"/>
@@ -48,13 +46,10 @@
 			<material>Gazebo/White</material>
 		</gazebo>
 
-		<!--*************   ARM     *************-->
-		<!--<xacro:arm parent="shoulder_${side}_link" side="${side}"/>-->
-
 		<!-- shoulder-arm joint -->
 		<joint name="shoulder_${side}_joint" type="revolute">
 			<xacro:if value="${side == 'right'}">
-				<origin xyz="${-upper_body_length/2 + shoulder_x_adjustment} ${upper_body_height + shoulder_y_adjustment} 0" rpy="${PI} ${PI} 0"/>
+				<origin xyz="${-upper_body_length/2 - shoulder_x_adjustment} ${upper_body_height + shoulder_y_adjustment} 0" rpy="${PI} ${PI} 0"/>
 			</xacro:if>
 			<xacro:if value="${side == 'left'}">
 				<origin xyz="${upper_body_length/2 + shoulder_x_adjustment} ${upper_body_height + shoulder_y_adjustment} 0" rpy="${PI} 0 0"/>

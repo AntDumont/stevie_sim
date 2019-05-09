@@ -5,16 +5,26 @@
 	<xacro:include filename="$(find stevie_description)/urdf/wheel/wheel.transmission.xacro" />
 -->
 
+	<xacro:include filename="$(find stevie_description)/urdf/arms/shoulders.xacro" />
+
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="arm_mass" value="1"/>
 	<xacro:property name="arm_length" value="0.124658905"/>
 	<xacro:property name="arm_width" value="0.1100"/>
 	<xacro:property name="arm_height" value="0.124658905"/>
 
+	<!--Adjust world's Y axis-->
+	<xacro:property name="arm_x_adjustment" value="0.065"/>
+	<!--Adjust world's -Z axis-->
+	<xacro:property name="right_arm_y_adjustment" value="-0.05"/>
+	<xacro:property name="left_arm_y_adjustment" value="0.55"/>
+
 	<xacro:property name="PI" value="3.14159"/>
 
 	<!--************************        ARMS          ************************-->
   <xacro:macro name="arm" params="parent side" >
+
+		<xacro:shoulder parent="${parent}" side="${side}"/>
 
 		<!-- arm link -->
 		<link name="arm_${side}_link">
@@ -54,14 +64,14 @@
 		<!-- shoulder-arm joint -->
 		<joint name="arm_${side}_joint" type="revolute">
 			<xacro:if value="${side == 'right'}">
-				<origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+				<origin xyz="${arm_x_adjustment} ${right_arm_y_adjustment} 0" rpy="0 ${PI} ${PI}"/>
 			</xacro:if>
 			<xacro:if value="${side == 'left'}">
-				<origin xyz="0 0 0" rpy="0 0 ${-PI/2}"/>
+				<origin xyz="${arm_x_adjustment} ${left_arm_y_adjustment} 0" rpy="0 0 0"/>
 			</xacro:if>
 			<axis xyz="0 0 1"/>
 			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
-			<parent link="${parent}"/>
+			<parent link="shoulder_${side}_link"/>
 			<child link="arm_${side}_link"/>
 		</joint>
 
