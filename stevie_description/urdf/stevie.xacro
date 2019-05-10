@@ -32,12 +32,12 @@
   <xacro:include filename="$(find stevie_description)/urdf/lower_body/lower_body.xacro" />
   <xacro:include filename="$(find stevie_description)/urdf/upper_body/upper_body.xacro" />
   <xacro:include filename="$(find stevie_description)/urdf/arms/arms.xacro" />
-  <xacro:include filename="$(find stevie_description)/urdf/head/neck.xacro" />
+  <xacro:include filename="$(find stevie_description)/urdf/head/head.xacro" />
 
   <xacro:lower_body  name="${lower_body_name}"/>
-  <xacro:upper_body parent="${lower_body_name}_link" name="${upper_body_name}"/>
+  <!--<xacro:upper_body parent="${lower_body_name}_link" name="${upper_body_name}"/>
   <xacro:arm parent="${upper_body_name}_link" side="left"/>
   <xacro:arm parent="${upper_body_name}_link" side="right"/>
-  <xacro:neck parent="${upper_body_name}_link"/>
+  <xacro:head parent="${upper_body_name}_link"/>-->
 
 </robot>

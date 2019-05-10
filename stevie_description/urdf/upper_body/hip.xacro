@@ -14,7 +14,7 @@
 	<!--Adjust on the world's X axis-->
 	<xacro:property name="hip_z_adjustment" value="-0.135"/>
 	<!--Adjust on the world's Z axis-->
-	<xacro:property name="hip_y_adjustment" value="-0.04"/>
+	<xacro:property name="hip_y_adjustment" value="0.025"/>
 
 	<xacro:property name="PI" value="3.14159"/>
 

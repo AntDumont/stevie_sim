@@ -8,7 +8,7 @@
 	<xacro:include filename="$(find stevie_description)/urdf/caster/caster.xacro" />
 
 	<!-- DECLARE VARIABLES -->
-	<xacro:property name="lower_body_mass" value="0.27"/>
+	<xacro:property name="lower_body_mass" value="27"/>
 	<xacro:property name="lower_body_length" value="0.485903015"/>
 	<xacro:property name="lower_body_width" value="0.516555237"/>
 	<xacro:property name="lower_body_height" value="0.475"/>
@@ -56,11 +56,11 @@
 			<child link="${name}_link"/>
 		</joint>
 
-		<!--**************        WHEELS          **************-->
+		<!-- wheels -->
 		<xacro:wheel parent="${name}_footprint" side="right"/>
 		<xacro:wheel parent="${name}_footprint" side="left"/>
 
-		<!--**************        CASTER          **************-->
+		<!-- caster wheel -->
 		<xacro:caster parent="${name}_footprint"/>
 
 	</xacro:macro>

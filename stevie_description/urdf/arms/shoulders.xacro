@@ -12,9 +12,9 @@
 	<xacro:property name="shoulder_height" value="0.1150"/>
 
 	<!--Adjust world's Z axis-->
-	<xacro:property name="shoulder_y_adjustment" value="-0.1465"/>
+	<xacro:property name="shoulder_y_adjustment" value="-0.17"/>
 	<!--Adjust world's Y axis-->
-	<xacro:property name="shoulder_x_adjustment" value="-0.04"/>
+	<xacro:property name="shoulder_x_adjustment" value="0.035"/>
 
 	<xacro:property name="PI" value="3.14159"/>
 

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--
+	<xacro:include filename="$(find stevie_description)/urdf/hip/hip.transmission.xacro" />
+-->
+
+	<xacro:include filename="$(find stevie_description)/urdf/head/neck.xacro" />
+
+	<!-- DECLARE VARIABLES -->
+	<xacro:property name="head_mass" value="1.5"/>
+	<xacro:property name="head_length" value="0.241447327"/>
+	<xacro:property name="head_width" value="0.241648773"/>
+	<xacro:property name="head_height" value="0.300608185"/>
+
+
+	<xacro:property name="PI" value="3.14159"/>
+
+	<!--************************        HEAD          ************************-->
+  <xacro:macro name="head" params="parent" >
+
+		<!-- neck -->
+	  <xacro:neck parent="${parent}"/>
+
+		<!-- head link -->
+		<link name="head_link">
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://stevie_description/meshes/collision/head_collision.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</collision>
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+					<geometry>
+				 		<mesh filename="package://stevie_description/meshes/visual/head.STL" scale="0.001 0.001 0.001"/>
+					</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${head_mass}"/>
+				<inertia ixx="119192846336.0000" ixy="15985847296.0000" ixz="2580351.2500" iyy="99658653696.0000" iyz="15342592.0000" izz="107701559296.0000"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="head_link">
+			<material>Gazebo/White</material>
+		</gazebo>
+
+		<!-- neck-head joint -->
+		<joint name="neck_head_joint" type="revolute">
+			<origin xyz="0 0 0" rpy="0 ${-PI/2} 0"/>
+			<axis xyz="0 0 1"/>
+			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
+			<parent link="neck_link"/>
+			<child link="head_link"/>
+		</joint>
+
+	</xacro:macro>
+	<!--***********************************************************************-->
+
+</robot>

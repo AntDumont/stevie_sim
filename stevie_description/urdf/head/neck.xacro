@@ -12,7 +12,7 @@
 	<xacro:property name="neck_height" value="0.220"/>
 
 	<!--Adjust the world's Z axis-->
-	<xacro:property name="neck_y_adjustment" value="-0.065"/>
+	<xacro:property name="neck_y_adjustment" value="0.04"/>
 
 	<xacro:property name="PI" value="3.14159"/>
 
