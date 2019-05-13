@@ -13,8 +13,14 @@
 	<xacro:property name="head_width" value="0.241648773"/>
 	<xacro:property name="head_height" value="0.300608185"/>
 
-
 	<xacro:property name="PI" value="3.14159"/>
+
+	<xacro:macro name="box_inertia" params="m x y z">
+    <inertia  ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0"
+              iyy="${m*(x*x+z*z)/12}" iyz="0"
+              izz="${m*(x*x+z*z)/12}"
+    />
+  </xacro:macro>
 
 	<!--************************        HEAD          ************************-->
   <xacro:macro name="head" params="parent" >
@@ -37,9 +43,9 @@
 					</geometry>
 			</visual>
 			<inertial>
-				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<origin xyz="0 0 ${head_height / 2}" rpy="0 0 0"/>
 				<mass value="${head_mass}"/>
-				<inertia ixx="119192846336.0000" ixy="15985847296.0000" ixz="2580351.2500" iyy="99658653696.0000" iyz="15342592.0000" izz="107701559296.0000"/>
+				<xacro:box_inertia m="${head_mass}" x="${head_width}" y="${head_height}" z="${head_length}"/>
 			</inertial>
 		</link>
 
@@ -49,8 +55,8 @@
 
 		<!-- neck-head joint -->
 		<joint name="neck_head_joint" type="revolute">
-			<origin xyz="0 0 0" rpy="0 ${-PI/2} 0"/>
-			<axis xyz="0 0 1"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<axis xyz="0 1 0"/>
 			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			<parent link="neck_link"/>
 			<child link="head_link"/>

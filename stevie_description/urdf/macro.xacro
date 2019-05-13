@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="scale_inertia" params="m v ixx ixy ixz iyy iyz izz" >
+		<inertia 	ixx="${ixx * m / v}" 	ixy="${ixy * m / v}" 	ixz="${ixz * m / v}"
+																		iyy="${iyy * m / v}" 	iyz="${iyz * m / v}"
+																													izz="${izz * m / v}"
+		/>
+	</xacro:macro>
+
+</robot>

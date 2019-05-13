@@ -35,9 +35,9 @@
   <xacro:include filename="$(find stevie_description)/urdf/head/head.xacro" />
 
   <xacro:lower_body  name="${lower_body_name}"/>
-  <!--<xacro:upper_body parent="${lower_body_name}_link" name="${upper_body_name}"/>
+  <xacro:upper_body parent="${lower_body_name}_link" name="${upper_body_name}"/>
   <xacro:arm parent="${upper_body_name}_link" side="left"/>
   <xacro:arm parent="${upper_body_name}_link" side="right"/>
-  <xacro:head parent="${upper_body_name}_link"/>-->
+  <xacro:head parent="${upper_body_name}_link"/>
 
 </robot>

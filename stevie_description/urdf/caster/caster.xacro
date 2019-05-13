@@ -55,7 +55,7 @@
 
 		<!-- footprint-caster joint -->
 		<joint name="caster_joint" type="fixed">
-			<origin xyz="${caster_x_adjustment} 0 ${caster_z_adjustment}" rpy="${PI/2} 0 0"/>
+			<origin xyz="${caster_x_adjustment} 0 ${caster_z_adjustment}" rpy="0 0 0"/>
 			<parent link="${parent}"/>
 			<child link="caster_link"/>
 		</joint>

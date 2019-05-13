@@ -7,14 +7,15 @@
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="shoulder_mass" value="1"/>
+	<xacro:property name="shoulder_volume" value="0.000678"/>
 	<xacro:property name="shoulder_length" value="0.2130"/>
 	<xacro:property name="shoulder_width" value="0.115000381"/>
 	<xacro:property name="shoulder_height" value="0.1150"/>
 
-	<!--Adjust world's Z axis-->
-	<xacro:property name="shoulder_y_adjustment" value="-0.17"/>
-	<!--Adjust world's Y axis-->
-	<xacro:property name="shoulder_x_adjustment" value="0.035"/>
+	<xacro:property name="shoulder_center_of_mass" value="-0.023361 0 0.002146"/>
+
+	<xacro:property name="shoulder_z_adjustment" value="-0.17"/>
+	<xacro:property name="shoulder_y_adjustment" value="0.035"/>
 
 	<xacro:property name="PI" value="3.14159"/>
 
@@ -36,9 +37,9 @@
 				</geometry>
 			</visual>
 			<inertial>
-				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<origin xyz="${shoulder_center_of_mass}" rpy="0 0 0"/>
 				<mass value="${shoulder_mass}"/>
-				<inertia ixx="822072832.0000" ixy="-14428306.0000" ixz="7534.551758" iyy="1594399616.0000" iyz="-3097.950439" izz="1878856192.0000"/>
+				<xacro:scale_inertia m="${shoulder_mass}" v="${shoulder_volume}" ixx="0.0000008220" ixy="0.0000000000" ixz="0.0000000144" iyy="0.0000018788" iyz="0.0000000000" izz="0.0000015944"/>
 			</inertial>
 		</link>
 
@@ -49,12 +50,13 @@
 		<!-- upper_body-shoulder joint -->
 		<joint name="shoulder_${side}_joint" type="revolute">
 			<xacro:if value="${side == 'right'}">
-				<origin xyz="${-upper_body_length/2 - shoulder_x_adjustment} ${upper_body_height + shoulder_y_adjustment} 0" rpy="${PI} ${PI} 0"/>
+				<origin xyz="0 ${-upper_body_length/2 - shoulder_y_adjustment} ${upper_body_height + shoulder_z_adjustment}" rpy="0 0 ${-PI/2}"/>
+				<axis xyz="1 0 0"/>
 			</xacro:if>
 			<xacro:if value="${side == 'left'}">
-				<origin xyz="${upper_body_length/2 + shoulder_x_adjustment} ${upper_body_height + shoulder_y_adjustment} 0" rpy="${PI} 0 0"/>
+				<origin xyz="0 ${upper_body_length/2 + shoulder_y_adjustment} ${upper_body_height + shoulder_z_adjustment}" rpy="0 0 ${PI/2}"/>
+				<axis xyz="-1 0 0"/>
 			</xacro:if>
-			<axis xyz="1 0 0"/>
 			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			<parent link="${parent}"/>
 			<child link="shoulder_${side}_link"/>

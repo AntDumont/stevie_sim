@@ -7,12 +7,20 @@
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="wheel_mass" value="1"/>
-	<xacro:property name="wheel_radius" value="0.10125"/>
-	<xacro:property name="wheel_thickness" value="0.04800"/>
+	<xacro:property name="wheel_radius" value="0.101238"/>
+	<xacro:property name="wheel_thickness" value="0.045983"/>
 	<xacro:property name="wheel_box_length" value="0.110775482"/>
-	<xacro:property name="chassis_length" value="0.3032"/>
+	<xacro:property name="chassis_length" value="0.303032"/>
+	<xacro:property name="chassis_width" value="0.5"/>
 
 	<xacro:property name="PI" value="3.14159"/>
+
+	<xacro:macro name="cylinder_inertia" params="m r h">
+	  <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+	    iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+	    izz="${m*r*r/2}"
+	  />
+	</xacro:macro>
 
 	<!--************************        WHEELS          ************************-->
   <xacro:macro name="wheel" params="parent side" >
@@ -32,13 +40,19 @@
 				</geometry>
 			</visual>
 			<inertial>
-				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
 				<mass value="${wheel_mass}"/>
-				<inertia ixx="7694243840.0000" ixy="21.275770" ixz="47.828678" iyy="4313382912.0000" iyz="65.004593" izz="4313351168.0000"/>
+				<xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
 			</inertial>
 		</link>
 
 		<gazebo reference="wheel_${side}_link">
+			<mu1>1.0</mu1>
+			<mu2>1.0</mu2>
+			<kp value="10000000.0"/>
+      <kd value="1.0"/>
+      <fdir1 value="1 0 0"/>
+
 			<material>Gazebo/Black</material>
 		</gazebo>
 
@@ -46,13 +60,16 @@
 		<joint name="wheel_${side}_joint" type="continuous">
 			<xacro:if value="${side == 'right'}">
 				<origin xyz="0 ${- wheel_thickness - chassis_length/2} 0" rpy="0 0 ${PI/2}"/>
+				<axis xyz="1 0 0"/>
 			</xacro:if>
 			<xacro:if value="${side == 'left'}">
 				<origin xyz="0 ${wheel_thickness + chassis_length/2} 0" rpy="0 0 ${-PI/2}"/>
+				<axis xyz="-1 0 0"/>
 			</xacro:if>
 			<parent link="${parent}"/>
 			<child link="wheel_${side}_link"/>
-			<axis xyz="1 0 0"/>
+      <limit effort="100" velocity="100"/>
+      <joint_properties damping="0.0" friciton="0.5"/>
 		</joint>
 
 	</xacro:macro>

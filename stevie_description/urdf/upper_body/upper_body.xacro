@@ -8,9 +8,12 @@
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="upper_body_mass" value="8"/>
+	<xacro:property name="upper_body_volume" value="0.010712"/>
 	<xacro:property name="upper_body_length" value="0.347374786"/>
 	<xacro:property name="upper_body_width" value="0.283975830"/>
 	<xacro:property name="upper_body_height" value="0.565"/>
+
+	<xacro:property name="upper_body_center_of_mass" value="0.000090 0 0.390377"/>
 
 	<xacro:property name="PI" value="3.14159"/>
 
@@ -32,9 +35,9 @@
 					</geometry>
 			</visual>
 			<inertial>
-				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<origin xyz="${upper_body_center_of_mass}" rpy="0 0 0"/>
 				<mass value="${upper_body_mass}"/>
-				<inertia ixx="182592012288.0000" ixy="1131537.1250" ixz="-3420374.2500" iyy="137232130048.0000" iyz="-56384828.0000" izz="183043080192.0000"/>
+				<xacro:scale_inertia m="${upper_body_mass}" v="${upper_body_volume}" ixx="0.0001825920" ixy="0" ixz="0" iyy="0.0001372321" iyz="0" izz="0.0001830431"/>
 			</inertial>
 		</link>
 
@@ -48,8 +51,8 @@
 		<!-- hip-upper_body joint -->
 		<joint name="hip_${name}_joint" type="revolute">
 			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<axis xyz="1 0 0"/>
-			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
+			<axis xyz="0 1 0"/>
+			<limit lower="-${PI/6}" upper="${PI/6}" effort="1000.0" velocity="0.5"/>
 			<parent link="hip_link"/>
 			<child link="${name}_link"/>
 		</joint>

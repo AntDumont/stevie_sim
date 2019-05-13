@@ -7,12 +7,15 @@
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="neck_mass" value="0.5"/>
+	<xacro:property name="neck_volume" value="0.00073"/>
 	<xacro:property name="neck_length" value="0.110"/>
 	<xacro:property name="neck_width" value="0.110"/>
 	<xacro:property name="neck_height" value="0.220"/>
 
+	<xacro:property name="neck_center_of_mass" value="0 0 -0.095837"/>
+
 	<!--Adjust the world's Z axis-->
-	<xacro:property name="neck_y_adjustment" value="0.04"/>
+	<xacro:property name="neck_z_adjustment" value="0.04"/>
 
 	<xacro:property name="PI" value="3.14159"/>
 
@@ -34,9 +37,9 @@
 					</geometry>
 			</visual>
 			<inertial>
-				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<origin xyz="${neck_center_of_mass}" rpy="0 0 0"/>
 				<mass value="${neck_mass}"/>
-				<inertia ixx="1929662464.0000" ixy="0.0" ixz="-1.590871" iyy="619161024.0000" iyz="0.0" izz="1930710144.0000"/>
+				<xacro:scale_inertia m="${neck_mass}" v="${neck_volume}" ixx="0.000019307" ixy="0.000000" ixz="0.000000" iyy="0.0000019296" iyz="0.000000" izz="0.0000006191"/>
 			</inertial>
 		</link>
 
@@ -46,8 +49,8 @@
 
 		<!-- upper_body-neck joint -->
 		<joint name="upper_body_neck_joint" type="revolute">
-			<origin xyz="0 ${upper_body_height + neck_y_adjustment} 0" rpy="0 0 0"/>
-			<axis xyz="0 1 0"/>
+			<origin xyz="0 0 ${upper_body_height + neck_z_adjustment}" rpy="0 0 0"/>
+			<axis xyz="0 0 1"/>
 			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			<parent link="${parent}"/>
 			<child link="neck_link"/>

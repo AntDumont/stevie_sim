@@ -6,16 +6,25 @@
 -->
 	<xacro:include filename="$(find stevie_description)/urdf/wheels/wheels.xacro" />
 	<xacro:include filename="$(find stevie_description)/urdf/caster/caster.xacro" />
+	<xacro:include filename="$(find stevie_description)/urdf/macro.xacro" />
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="lower_body_mass" value="27"/>
-	<xacro:property name="lower_body_length" value="0.485903015"/>
-	<xacro:property name="lower_body_width" value="0.516555237"/>
+	<xacro:property name="lower_body_volume" value="0.016607"/>
+	<xacro:property name="lower_body_length" value="0.485903"/>
+	<xacro:property name="lower_body_width" value="0.516555"/>
 	<xacro:property name="lower_body_height" value="0.475"/>
 
-	<xacro:property name="lower_body_z_adjustment" value="-0.075"/>
+	<xacro:property name="lower_body_center_of_mass" value="-0.112043 0.000001 0.051805"/>
 
 	<xacro:property name="PI" value="3.14159"/>
+
+	<xacro:macro name="box_inertia" params="m x y z">
+    <inertia  ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0"
+              iyy="${m*(x*x+z*z)/12}" iyz="0"
+              izz="${m*(x*x+z*z)/12}"
+    />
+  </xacro:macro>
 
 	<!--************************        LOWER BODY          ************************-->
   <xacro:macro name="lower_body" params="name" >
@@ -38,9 +47,9 @@
 					</geometry>
 			</visual>
 			<inertial>
-				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<origin xyz="${lower_body_center_of_mass}" rpy="0 0 0"/>
 				<mass value="${lower_body_mass}"/>
-				<inertia ixx="405031911424.0000" ixy="-6338355.0000" ixz="1364738.3750" iyy="423088029696.0000" iyz="3831503104.0000" izz="255725256704.0000"/>
+				<xacro:scale_inertia m="${lower_body_mass}" v="${lower_body_volume}" ixx="0.0002557254" ixy="0.0000000013" ixz="0.0000038315" iyy="0.0004050320" iyz="-0.00000000634" izz="0.0004230882"/>
 			</inertial>
 		</link>
 
@@ -49,12 +58,47 @@
 		</gazebo>
 
 
+<!--
+	<link name="${name}_link">
+		<collision>
+			<origin xyz="0 0 0.2" rpy="0 0 0"/>
+			<geometry>
+				<box size="${lower_body_length} ${lower_body_width - 0.2} ${lower_body_height}"/>
+			</geometry>
+		</collision>
+		<visual>
+			<origin xyz="0 0 0.2" rpy="0 0 0"/>
+				<geometry>
+					<box size="${lower_body_length} ${lower_body_width - 0.2} ${lower_body_height}"/>
+				</geometry>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0.2" rpy="0 0 0"/>
+			<mass value="${lower_body_mass}"/>
+			<box_inertia m="${lower_body_mass}" x="${lower_body_length}" y="${lower_body_width - 0.2}" z="${lower_body_height}"/>
+		</inertial>
+	</link>
+
+	<gazebo reference="${name}_link">
+		<material>Gazebo/White</material>
+	</gazebo>
+-->
+
+
 		<!-- footprint-lower_body joint -->
 		<joint name="${name}_footprint_joint" type="fixed">
-			<origin xyz="0 0 ${lower_body_z_adjustment}" rpy="${PI/2} 0 ${PI/2}"/>
+			<origin xyz="0 0 ${wheel_radius / 2}" rpy="0 0 0"/>
 			<parent link="${name}_footprint"/>
 			<child link="${name}_link"/>
 		</joint>
+
+<!--
+	<joint name="${name}_footprint_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="${name}_footprint"/>
+		<child link="${name}_link"/>
+	</joint>
+-->
 
 		<!-- wheels -->
 		<xacro:wheel parent="${name}_footprint" side="right"/>
