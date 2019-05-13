@@ -4,7 +4,6 @@
 <!--
 	<xacro:include filename="$(find stevie_description)/urdf/hip/hip.transmission.xacro" />
 -->
-	<xacro:include filename="$(find stevie_description)/urdf/macro.xacro" />
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="hip_mass" value="0.1"/>
@@ -56,6 +55,7 @@
 			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			<parent link="${parent}"/>
 			<child link="hip_link"/>
+      <joint_properties damping="10" friciton="0.5"/>
 		</joint>
 
 	</xacro:macro>

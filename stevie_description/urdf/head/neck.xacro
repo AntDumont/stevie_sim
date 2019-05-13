@@ -54,6 +54,8 @@
 			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			<parent link="${parent}"/>
 			<child link="neck_link"/>
+      <limit effort="100" velocity="100"/>
+      <joint_properties damping="10" friciton="0.5"/>
 		</joint>
 
 	</xacro:macro>
