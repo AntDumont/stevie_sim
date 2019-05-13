@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
-<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot  xmlns:xacro="http://ros.org/wiki/xacro">
 
-<!--
-	<xacro:include filename="$(find stevie_description)/urdf/wheel/wheel.transmission.xacro" />
--->
+	<xacro:include filename="$(find stevie_description)/urdf/wheels/wheels.transmission.xacro" />
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="wheel_mass" value="1"/>
@@ -71,6 +69,9 @@
       <limit effort="100" velocity="100"/>
       <joint_properties damping="0.0" friciton="0.5"/>
 		</joint>
+
+		<!-- transmission -->
+		<xacro:wheel_transmission side="${side}"/>
 
 	</xacro:macro>
 	<!--***********************************************************************-->

@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
-<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot  xmlns:xacro="http://ros.org/wiki/xacro">
 
-<!--
-	<xacro:include filename="$(find stevie_description)/urdf/hip/hip.transmission.xacro" />
--->
+	<xacro:include filename="$(find stevie_description)/urdf/upper_body/upper_body.transmission.xacro" />
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="hip_mass" value="0.1"/>
@@ -57,6 +55,9 @@
 			<child link="hip_link"/>
       <joint_properties damping="10" friciton="0.5"/>
 		</joint>
+
+		<!-- transmission -->
+		<xacro:hip_transmission parent="${parent}"/>
 
 	</xacro:macro>
 	<!--***********************************************************************-->

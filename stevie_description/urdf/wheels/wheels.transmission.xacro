@@ -2,16 +2,12 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
 	<xacro:macro name="wheel_transmission" params="side">
-		<transmission name="${side}_transmission">
+		<transmission name="wheel_${side}_transmission">
 			<type>transmission_interface/SimpleTransmission</type>
-			<!-- FOR HYDRO -->  <!--
-			<joint name="wheel_${side}_joint"/>
-			-->
-			<!-- FOR INDIGO -->
 			<joint name="wheel_${side}_joint">
 				<hardwareInterface>EffortJointInterface</hardwareInterface>
     		</joint>
-			<actuator name="${side}_Motor">
+			<actuator name="${side}_motor">
 				<hardwareInterface>EffortJointInterface</hardwareInterface>
 				<mechanicalReduction>1</mechanicalReduction>
 			</actuator>

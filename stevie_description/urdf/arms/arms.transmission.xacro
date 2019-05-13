@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<!-- SHOULDER -->
+	<xacro:macro name="shoulder_transmission" params="side">
+		<transmission name="shoulder_${side}_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="upper_body_shoulder_${side}_joint">
+				<hardwareInterface>EffortJointInterface</hardwareInterface>
+    		</joint>
+			<actuator name="shoulder_${side}_motor">
+				<hardwareInterface>EffortJointInterface</hardwareInterface>
+				<mechanicalReduction>1</mechanicalReduction>
+			</actuator>
+		</transmission>
+	</xacro:macro>
+
+	<!-- ARM -->
+	<xacro:macro name="arm_transmission" params="side">
+		<transmission name="arm_${side}_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="arm_${side}_joint">
+				<hardwareInterface>EffortJointInterface</hardwareInterface>
+    		</joint>
+			<actuator name="shoulder_arm_${side}_motor">
+				<hardwareInterface>EffortJointInterface</hardwareInterface>
+				<mechanicalReduction>1</mechanicalReduction>
+			</actuator>
+		</transmission>
+	</xacro:macro>
+
+</robot>
