@@ -48,6 +48,9 @@
 		</link>
 
 		<gazebo reference="head_link">
+			<mu1>1.0</mu1>
+			<mu2>1.0</mu2>
+			<maxVel value="0"/>
 			<material>Gazebo/White</material>
 		</gazebo>
 

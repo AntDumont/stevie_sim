@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
 <robot  xmlns:xacro="http://ros.org/wiki/xacro">
 
-<!--
-	<xacro:include filename="$(find stevie_description)/urdf/wheel/wheel.transmission.xacro" />
--->
+
+	<xacro:include filename="$(find stevie_description)/urdf/arms/arms.transmission.xacro" />
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="shoulder_mass" value="1"/>
@@ -44,6 +43,9 @@
 		</link>
 
 		<gazebo reference="shoulder_${side}_link">
+			<mu1>1.0</mu1>
+			<mu2>1.0</mu2>
+			<maxVel value="0"/>
 			<material>Gazebo/White</material>
 		</gazebo>
 

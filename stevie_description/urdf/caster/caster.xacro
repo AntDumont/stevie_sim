@@ -50,6 +50,7 @@
 		<gazebo reference="caster_link">
 			<mu1>0.0</mu1>
 			<mu2>0.0</mu2>
+			<maxVel value="0"/>
 			<material>Gazebo/Black</material>
 		</gazebo>
 
