@@ -57,7 +57,7 @@
 		<!-- lower_body-wheel joint -->
 		<joint name="wheel_${side}_joint" type="continuous">
 			<xacro:if value="${side == 'right'}">
-				<origin xyz="0 ${- wheel_thickness - chassis_length/2} 0" rpy="0 0 ${PI/2}"/>
+				<origin xyz="0 ${-wheel_thickness - chassis_length/2} 0" rpy="0 0 ${PI/2}"/>
 				<axis xyz="1 0 0"/>
 			</xacro:if>
 			<xacro:if value="${side == 'left'}">
