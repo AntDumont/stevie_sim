@@ -7,7 +7,7 @@
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="caster_mass" value="0.5"/>
-	<xacro:property name="caster_radius" value="0.133"/>
+	<xacro:property name="caster_radius" value="0.05"/>
 
 	<xacro:property name="caster_x_adjustment" value="-0.3055"/>
 	<xacro:property name="caster_z_adjustment" value="-0.05"/>
@@ -31,13 +31,13 @@
 			<collision>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-					<mesh filename="package://stevie_description/meshes/collision/caster_collision.STL" scale="0.001 0.001 0.001"/>
+					<sphere radius="${caster_radius}"/>
 				</geometry>
 			</collision>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-					<mesh filename="package://stevie_description/meshes/visual/caster.STL" scale="0.001 0.001 0.001"/>
+					<mesh filename="package://stevie_description/meshes/collision/caster_collision.STL" scale="0.001 0.001 0.001"/>
 				</geometry>
 			</visual>
 			<inertial>

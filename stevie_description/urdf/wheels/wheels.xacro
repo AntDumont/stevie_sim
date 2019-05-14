@@ -26,15 +26,15 @@
 		<!-- wheel link -->
 		<link name="wheel_${side}_link">
 			<collision>
-				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
 				<geometry>
-					<mesh filename="package://stevie_description/meshes/collision/wheel_collision.STL" scale="0.001 0.001 0.001"/>
+			 		<cylinder length="${wheel_thickness}" radius="${wheel_radius}"/>
 				</geometry>
 			</collision>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-			 		<mesh filename="package://stevie_description/meshes/visual/wheel.STL" scale="0.001 0.001 0.001"/>
+					<mesh filename="package://stevie_description/meshes/collision/wheel_collision.STL" scale="0.001 0.001 0.001"/>
 				</geometry>
 			</visual>
 			<inertial>
