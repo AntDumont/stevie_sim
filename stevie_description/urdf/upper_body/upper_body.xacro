@@ -43,15 +43,15 @@
 		<gazebo reference="${name}_link">
 			<mu1>1.0</mu1>
 			<mu2>1.0</mu2>
-			<maxVel value="0"/>
+			<maxVel>0</maxVel>
 			<material>Gazebo/White</material>
 		</gazebo>
 
 		<!-- hip -->
 		<xacro:hip parent="${parent}"/>
 
-		<!-- hip-upper_body joint -->
-		<joint name="hip_${name}_joint" type="revolute">
+		<!-- upper_body-hip joint -->
+		<joint name="upper_body_hip_joint" type="revolute">
 			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<axis xyz="0 1 0"/>
 			<limit lower="-${PI/6}" upper="${PI/6}" effort="1000.0" velocity="0.5"/>

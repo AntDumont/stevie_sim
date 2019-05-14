@@ -44,13 +44,13 @@
 		<gazebo reference="hip_link">
 			<mu1>1.0</mu1>
 			<mu2>1.0</mu2>
-			<maxVel value="0"/>
+			<maxVel>0</maxVel>
 			<material>Gazebo/White</material>
 		</gazebo>
 
 
 		<!-- lower_body-hip joint -->
-		<joint name="hip_${parent}_joint" type="revolute">
+		<joint name="hip_lower_body_joint" type="revolute">
 			<origin xyz="${hip_x_adjustment} 0 ${hip_z_adjustment}" rpy="0 0 0"/>
 			<axis xyz="0 0 1"/>
 			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>

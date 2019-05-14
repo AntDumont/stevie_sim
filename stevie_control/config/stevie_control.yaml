@@ -1,0 +1,48 @@
+stevie:
+
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  # Joint Controllers ---------------------------------------
+  leftWheel_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: wheel_left_joint
+    pid: {p: 100.0, i: 0.1, d: 10.0}
+  rightWheel_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: wheel_right_joint
+    pid: {p: 100.0, i: 0.1, d: 10.0}
+  hip_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_lower_body_joint
+    pid: {p: 100.0, i: 0.1, d: 10.0}
+  upperBody_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: upper_body_hip_joint
+    pid: {p: 100.0, i: 0.1, d: 10.0}
+  leftShoulder_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: upper_body_shoulder_left_joint
+    pid: {p: 100.0, i: 0.1, d: 10.0}
+  rightShoulder_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: upper_body_shoulder_right_joint
+    pid: {p: 100.0, i: 0.1, d: 10.0}
+  leftArm_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: shoulder_arm_left_joint
+    pid: {p: 100.0, i: 0.1, d: 10.0}
+  rightArm_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: shoulder_arm_right_joint
+    pid: {p: 100.0, i: 0.1, d: 10.0}
+  neck_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: upper_body_neck_joint
+    pid: {p: 100.0, i: 0.1, d: 10.0}
+  head_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: neck_head_joint
+    pid: {p: 100.0, i: 0.1, d: 10.0}

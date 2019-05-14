@@ -45,7 +45,7 @@
 		<gazebo reference="shoulder_${side}_link">
 			<mu1>1.0</mu1>
 			<mu2>1.0</mu2>
-			<maxVel value="0"/>
+			<maxVel>0</maxVel>
 			<material>Gazebo/White</material>
 		</gazebo>
 
