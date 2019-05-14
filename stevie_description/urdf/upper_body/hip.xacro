@@ -60,7 +60,7 @@
 		</joint>
 
 		<!-- transmission -->
-		<xacro:hip_transmission parent="${parent}"/>
+		<xacro:hip_transmission/>
 
 	</xacro:macro>
 	<!--***********************************************************************-->

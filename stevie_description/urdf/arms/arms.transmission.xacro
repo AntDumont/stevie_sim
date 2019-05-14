@@ -6,10 +6,10 @@
 		<transmission name="shoulder_${side}_transmission">
 			<type>transmission_interface/SimpleTransmission</type>
 			<joint name="upper_body_shoulder_${side}_joint">
-				<hardwareInterface>EffortJointInterface</hardwareInterface>
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     		</joint>
 			<actuator name="shoulder_${side}_motor">
-				<hardwareInterface>EffortJointInterface</hardwareInterface>
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 				<mechanicalReduction>1</mechanicalReduction>
 			</actuator>
 		</transmission>
@@ -19,11 +19,11 @@
 	<xacro:macro name="arm_transmission" params="side">
 		<transmission name="arm_${side}_transmission">
 			<type>transmission_interface/SimpleTransmission</type>
-			<joint name="arm_${side}_joint">
-				<hardwareInterface>EffortJointInterface</hardwareInterface>
+			<joint name="shoulder_arm_${side}_joint">
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     		</joint>
-			<actuator name="shoulder_arm_${side}_motor">
-				<hardwareInterface>EffortJointInterface</hardwareInterface>
+			<actuator name="arm_${side}_motor">
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 				<mechanicalReduction>1</mechanicalReduction>
 			</actuator>
 		</transmission>

@@ -4,15 +4,11 @@
 	<xacro:macro name="neck_transmission">
 		<transmission name="neck_transmission">
 			<type>transmission_interface/SimpleTransmission</type>
-			<!-- FOR HYDRO -->  <!--
-			<joint name="wheel_${side}_joint"/>
-			-->
-			<!-- FOR INDIGO -->
 			<joint name="upper_body_neck_joint">
-				<hardwareInterface>EffortJointInterface</hardwareInterface>
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     		</joint>
 			<actuator name="neck_motor">
-				<hardwareInterface>EffortJointInterface</hardwareInterface>
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 				<mechanicalReduction>1</mechanicalReduction>
 			</actuator>
 		</transmission>
@@ -22,15 +18,11 @@
 	<xacro:macro name="head_transmission">
 		<transmission name="head_transmission">
 			<type>transmission_interface/SimpleTransmission</type>
-			<!-- FOR HYDRO -->  <!--
-			<joint name="wheel_${side}_joint"/>
-			-->
-			<!-- FOR INDIGO -->
 			<joint name="neck_head_joint">
-				<hardwareInterface>EffortJointInterface</hardwareInterface>
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     		</joint>
 			<actuator name="head_motor">
-				<hardwareInterface>EffortJointInterface</hardwareInterface>
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 				<mechanicalReduction>1</mechanicalReduction>
 			</actuator>
 		</transmission>

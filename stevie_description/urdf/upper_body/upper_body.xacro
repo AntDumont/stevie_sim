@@ -61,7 +61,7 @@
 		</joint>
 
 		<!-- transmission -->
-		<xacro:upper_body_transmission name="${name}"/>
+		<xacro:upper_body_transmission/>
 
 	</xacro:macro>
 	<!--***********************************************************************-->
