@@ -210,12 +210,12 @@
 		 		<alwaysOn>true</alwaysOn>
 		 		<updateRate>1.0</updateRate>
 		 		<cameraName>kinect_camera</cameraName>
-		 		<imageTopicName>kinect/depth/image_raw</imageTopicName>
-		 		<cameraInfoTopicName>kinect/depth/camera_info</cameraInfoTopicName>
-		 		<depthImageTopicName>kinect/depth/image_raw</depthImageTopicName>
-		 		<depthImageInfoTopicName>kinect/depth/camera_info</depthImageInfoTopicName>
-		 		<pointCloudTopicName>kinect/depth/points</pointCloudTopicName>
-		 		<frameName>${kinect_name}</frameName>
+		 		<imageTopicName>depth/image_raw</imageTopicName>
+		 		<cameraInfoTopicName>depth/camera_info</cameraInfoTopicName>
+		 		<depthImageTopicName>depth/image_raw</depthImageTopicName>
+		 		<depthImageInfoTopicName>depth/camera_info</depthImageInfoTopicName>
+		 		<pointCloudTopicName>depth/points</pointCloudTopicName>
+		 		<frameName>/${kinect_name}_link</frameName>
 		 		<pointCloudCutoff>0.5</pointCloudCutoff>
 		 		<distortionK1>0.00000001</distortionK1>
 		 		<distortionK2>0.00000001</distortionK2>

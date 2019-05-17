@@ -1,0 +1,30 @@
+digraph G {
+"odom" -> "base_link"[label="Broadcaster: /gazebo\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"hip_link" -> "upper_body_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"lower_body_link" -> "hip_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"lower_body_footprint" -> "lower_body_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 100.231 sec old)\nBuffer length: 0.000 sec\n"];
+"neck_link" -> "head_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"upper_body_link" -> "neck_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"shoulder_left_link" -> "arm_left_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"upper_body_link" -> "shoulder_left_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"shoulder_right_link" -> "arm_right_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"upper_body_link" -> "shoulder_right_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"lower_body_link" -> "wheel_left_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"lower_body_link" -> "wheel_right_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 52.273 Hz\nMost recent transform: 100.227 ( 0.004 sec old)\nBuffer length: 0.440 sec\n"];
+"upper_body_link" -> "back_camera_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 100.231 sec old)\nBuffer length: 0.000 sec\n"];
+"lower_body_link" -> "back_laser_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 100.231 sec old)\nBuffer length: 0.000 sec\n"];
+"lower_body_link" -> "caster_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 100.231 sec old)\nBuffer length: 0.000 sec\n"];
+"lower_body_link" -> "front_laser_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 100.231 sec old)\nBuffer length: 0.000 sec\n"];
+"upper_body_link" -> "front_left_camera_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 100.231 sec old)\nBuffer length: 0.000 sec\n"];
+"upper_body_link" -> "front_right_camera_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 100.231 sec old)\nBuffer length: 0.000 sec\n"];
+"upper_body_link" -> "kinect_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 100.231 sec old)\nBuffer length: 0.000 sec\n"];
+"head_link" -> "top_camera_link"[label="Broadcaster: /stevie/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 100.231 sec old)\nBuffer length: 0.000 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 100.231"[ shape=plaintext ] ;
+ }->"odom";
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 100.231"[ shape=plaintext ] ;
+ }->"lower_body_footprint";
+}
