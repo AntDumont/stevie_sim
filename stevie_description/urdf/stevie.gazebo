@@ -4,9 +4,233 @@
   <!-- ros_control plugin -->
 	<gazebo>
 		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-			<robotNamespace>/stevie</robotNamespace>      
+			<robotNamespace>/stevie</robotNamespace>
 		</plugin>
 	</gazebo>
+
+	<!-- Cameras -->
+	<gazebo reference="${front_left_camera_name}_link">
+    <sensor type="camera" name="front_left_camera">
+      <update_rate>30.0</update_rate>
+      <camera name="${front_left_camera_name}">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>${front_left_camera_name}</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>${front_left_camera_name}_link</frameName>
+        <hackBaseLine>0.07</hackBaseLine>
+        <distorsionK1>0.0</distorsionK1>
+        <distorsionK2>0.0</distorsionK2>
+        <distorsionK3>0.0</distorsionK3>
+        <distorsionT1>0.0</distorsionT1>
+        <distorsionT2>0.0</distorsionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+	<gazebo reference="${front_right_camera_name}_link">
+    <sensor type="camera" name="front_right_camera">
+      <update_rate>30.0</update_rate>
+      <camera name="${front_right_camera_name}">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>${front_right_camera_name}</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>${front_right_camera_name}</frameName>
+        <hackBaseLine>0.07</hackBaseLine>
+        <distorsionK1>0.0</distorsionK1>
+        <distorsionK2>0.0</distorsionK2>
+        <distorsionK3>0.0</distorsionK3>
+        <distorsionT1>0.0</distorsionT1>
+        <distorsionT2>0.0</distorsionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+	<gazebo reference="${back_camera_name}_link">
+    <sensor type="camera" name="back_camera">
+      <update_rate>30.0</update_rate>
+      <camera name="${back_camera_name}">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>${back_camera_name}</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>${back_camera_name}</frameName>
+        <hackBaseLine>0.07</hackBaseLine>
+        <distorsionK1>0.0</distorsionK1>
+        <distorsionK2>0.0</distorsionK2>
+        <distorsionK3>0.0</distorsionK3>
+        <distorsionT1>0.0</distorsionT1>
+        <distorsionT2>0.0</distorsionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+	<gazebo reference="${top_camera_name}_link">
+    <sensor type="camera" name="top_camera">
+      <update_rate>30.0</update_rate>
+      <camera name="${top_camera_name}">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>${top_camera_name}</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>${top_camera_name}</frameName>
+        <hackBaseLine>0.07</hackBaseLine>
+        <distorsionK1>0.0</distorsionK1>
+        <distorsionK2>0.0</distorsionK2>
+        <distorsionK3>0.0</distorsionK3>
+        <distorsionT1>0.0</distorsionT1>
+        <distorsionT2>0.0</distorsionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+	<!-- Lasers -->
+  <gazebo reference="${front_laser_name}_link">
+    <sensor type="ray" name="${front_laser_name}">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>front_laser/scan</topicName>
+        <frameName>/${front_laser_name}_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+	<gazebo reference="${back_laser_name}_link">
+    <sensor type="ray" name="${back_laser_name}">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>back_laser/scan</topicName>
+        <frameName>/${back_laser_name}_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+	<!-- Kinect -->
+	<gazebo reference="${kinect_name}_link">
+ 		<sensor name="Kinect" type="depth">
+		 	<plugin name="kinect_controller" filename="libgazebo_ros_openni_kinect.so">
+		 		<baseline>0.2</baseline>
+		 		<alwaysOn>true</alwaysOn>
+		 		<updateRate>1.0</updateRate>
+		 		<cameraName>kinect_camera</cameraName>
+		 		<imageTopicName>kinect/depth/image_raw</imageTopicName>
+		 		<cameraInfoTopicName>kinect/depth/camera_info</cameraInfoTopicName>
+		 		<depthImageTopicName>kinect/depth/image_raw</depthImageTopicName>
+		 		<depthImageInfoTopicName>kinect/depth/camera_info</depthImageInfoTopicName>
+		 		<pointCloudTopicName>kinect/depth/points</pointCloudTopicName>
+		 		<frameName>${kinect_name}</frameName>
+		 		<pointCloudCutoff>0.5</pointCloudCutoff>
+		 		<distortionK1>0.00000001</distortionK1>
+		 		<distortionK2>0.00000001</distortionK2>
+		 		<distortionK3>0.00000001</distortionK3>
+		 		<distortionT1>0.00000001</distortionT1>
+		 		<distortionT2>0.00000001</distortionT2>
+		 		<CxPrime>0</CxPrime>
+		 		<Cx>0</Cx>
+		 		<Cy>0</Cy>
+		 		<focalLength>0</focalLength>
+		 		<hackBaseline>0</hackBaseline>
+		 	</plugin>
+		 </sensor>
+	 </gazebo>
+
 
 
 </robot>

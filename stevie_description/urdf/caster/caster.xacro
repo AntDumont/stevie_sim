@@ -7,7 +7,7 @@
 
 	<!-- DECLARE VARIABLES -->
 	<xacro:property name="caster_mass" value="0.5"/>
-	<xacro:property name="caster_radius" value="0.05"/>
+	<xacro:property name="caster_radius" value="0.052"/>
 
 	<xacro:property name="caster_x_adjustment" value="-0.3055"/>
 	<xacro:property name="caster_z_adjustment" value="-0.05"/>

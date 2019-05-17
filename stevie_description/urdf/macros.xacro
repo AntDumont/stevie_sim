@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- scale the inertia -->
+  <xacro:macro name="scale_inertia" params="m v ixx ixy ixz iyy iyz izz" >
+		<inertia 	ixx="${ixx * m / v}" 	ixy="${ixy * m / v}" 	ixz="${ixz * m / v}"
+																		iyy="${iyy * m / v}" 	iyz="${iyz * m / v}"
+																													izz="${izz * m / v}"
+		/>
+	</xacro:macro>
+
+  <!-- compute the inertia of a box -->
+  <xacro:macro name="box_inertia" params="m x y z">
+    <inertia  ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0"
+              iyy="${m*(x*x+z*z)/12}" iyz="0"
+              izz="${m*(x*x+z*z)/12}"
+    />
+  </xacro:macro>
+
+  <!-- compute the inertia of a cylinder -->
+	<xacro:macro name="cylinder_inertia" params="m r h">
+	  <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+	    iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+	    izz="${m*r*r/2}"
+	  />
+	</xacro:macro>
+
+</robot>
