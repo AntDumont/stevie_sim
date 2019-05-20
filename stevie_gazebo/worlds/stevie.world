@@ -18,5 +18,9 @@
 		</ode>
 	</physics>
 
+	<scene>
+    <ambient>0.6 0.6 0.6 1.0</ambient>
+  </scene>
+
 </world>
 </sdf>

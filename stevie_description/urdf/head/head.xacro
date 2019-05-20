@@ -24,13 +24,13 @@
 			<collision>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-					<mesh filename="package://stevie_description/meshes/collision/head_collision.STL" scale="0.001 0.001 0.001"/>
+					<mesh filename="package://stevie_description/meshes/collision/head_collision.stl" scale="0.001 0.001 0.001"/>
 				</geometry>
 			</collision>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 					<geometry>
-				 		<mesh filename="package://stevie_description/meshes/visual/head.STL" scale="0.001 0.001 0.001"/>
+				 		<mesh filename="package://stevie_description/meshes/visual/head.stl" scale="0.001 0.001 0.001"/>
 					</geometry>
 			</visual>
 			<inertial>
@@ -59,6 +59,86 @@
 
 		<!-- transmission -->
 		<xacro:head_transmission/>
+
+		<!--************************        SCREENS          ************************-->
+		<!-- upper screen link -->
+		<link name="upper_screen_link">
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://stevie_description/meshes/visual/upper_screen.stl" scale="0.001001 0.001001 0.001001"/>
+				</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+				<mass value="0.00001"/>
+				<inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="upper_screen_link">
+			<material>Gazebo/Black</material>
+		</gazebo>
+
+		<!-- upper_screen joint -->
+		<joint name="upper_screen_joint" type="fixed">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<parent link="head_link"/>
+			<child link="upper_screen_link"/>
+		</joint>
+
+		<!-- lower screen link -->
+		<link name="lower_screen_link">
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://stevie_description/meshes/visual/lower_screen.stl" scale="0.001001 0.001001 0.001001"/>
+				</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+				<mass value="0.00001"/>
+				<inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="lower_screen_link">
+			<material>Gazebo/Black</material>
+		</gazebo>
+
+		<!-- lower_screen joint -->
+		<joint name="lower_screen_joint" type="fixed">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<parent link="head_link"/>
+			<child link="lower_screen_link"/>
+		</joint>
+
+		<!--************************        EARCOVERS          ************************-->
+		<!-- earcovers link -->
+		<link name="earcovers_link">
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<mesh filename="package://stevie_description/meshes/visual/earcovers.stl" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+				<mass value="0.00001"/>
+				<inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="earcovers_link">
+			<material>Gazebo/Yellow</material>
+		</gazebo>
+
+		<!-- upper_screen joint -->
+		<joint name="earcovers_joint" type="fixed">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<parent link="head_link"/>
+			<child link="earcovers_link"/>
+		</joint>
 
 	</xacro:macro>
 	<!--***********************************************************************-->
