@@ -54,7 +54,7 @@
 			<limit lower="-${PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			<parent link="neck_link"/>
 			<child link="head_link"/>
-      <joint_properties damping="10" friciton="0.5"/>
+      <dynamics damping="10" friction="0.5"/>
 		</joint>
 
 		<!-- transmission -->

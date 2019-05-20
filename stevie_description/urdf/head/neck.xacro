@@ -58,7 +58,7 @@
 			<parent link="${parent}"/>
 			<child link="neck_link"/>
       <limit effort="100" velocity="100"/>
-      <joint_properties damping="10" friciton="0.5"/>
+      <dynamics damping="10" friction="0.5"/>
 		</joint>
 
 		<!-- transmission -->
