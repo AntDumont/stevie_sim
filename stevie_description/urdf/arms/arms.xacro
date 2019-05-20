@@ -12,7 +12,9 @@
 	<xacro:property name="arm_volume" value="0.002083"/>
 	<xacro:property name="arm_length" value="0.124658905"/>
 	<xacro:property name="arm_width" value="0.1100"/>
-	<xacro:property name="arm_height" value="0.124658905"/>
+	<xacro:property name="arm_height" value="0.304997498"/>
+
+	<xacro:property name="arm_sphere_radius" value="0.03"/>
 
 	<xacro:property name="right_arm_center_of_mass" value="-0.001570 -0.001100 -0.074465"/>
 	<xacro:property name="left_arm_center_of_mass" value="-0.001570 0.001100 -0.074465"/>
@@ -77,6 +79,38 @@
 
 		<!-- transmission -->
 		<xacro:arm_transmission side="${side}"/>
+
+		<!-- arm sphere link -->
+		<link name="arm_sphere_${side}_link">
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<sphere radius="${arm_sphere_radius}"/>
+				</geometry>
+			</collision>
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<sphere radius="${arm_sphere_radius}"/>
+				</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+				<mass value="0.00001"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="arm_sphere_${side}_link">
+			<material>Gazebo/Yellow</material>
+		</gazebo>
+
+		<!-- arm_sphere joint -->
+		<joint name="arm_sphere_${side}_joint" type="fixed">
+			<origin xyz="0 0 ${-arm_height + arm_sphere_radius + 0.02}" rpy="0 0 0"/>
+			<parent link="arm_${side}_link"/>
+			<child link="arm_sphere_${side}_link"/>
+		</joint>
 
 	</xacro:macro>
 	<!--***********************************************************************-->
