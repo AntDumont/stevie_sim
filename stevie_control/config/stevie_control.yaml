@@ -3,10 +3,10 @@ joint_state_controller:
   type: joint_state_controller/JointStateController
   publish_rate: 50
 
-gazebo_ros_control:
-  pid_gains:
-    wheel_left_joint: {p: 100.0, i: 0.0, d: 0.0}
-    wheel_right_joint: {p: 100.0, i: 0.0, d: 0.0}
+# gazebo_ros_control:
+#   pid_gains:
+#     wheel_left_joint: {p: 100.0, i: 0.0, d: 0.0}
+#     wheel_right_joint: {p: 100.0, i: 0.0, d: 0.0}
 
 # Joint Controllers ---------------------------------------
 # leftWheel_effort_controller:
@@ -17,6 +17,7 @@ gazebo_ros_control:
 #   type: effort_controllers/JointEffortController
 #   joint: wheel_right_joint
 #   pid: {p: 100.0, i: 0.1, d: 10.0}
+
 mobile_base_controller:
   type: diff_drive_controller/DiffDriveController
   left_wheel: wheel_left_joint

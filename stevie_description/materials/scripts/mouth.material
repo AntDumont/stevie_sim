@@ -1,0 +1,13 @@
+material MouthTexture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture stevie_mouth.png
+      }
+    }
+  }
+}

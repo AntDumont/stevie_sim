@@ -29,14 +29,14 @@
 			</collision>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
-					<geometry>
-				 		<mesh filename="package://stevie_description/meshes/visual/head.stl" scale="0.001 0.001 0.001"/>
-					</geometry>
+				<geometry>
+			 		<mesh filename="package://stevie_description/meshes/visual/head.stl" scale="0.001 0.001 0.001"/>
+				</geometry>
 			</visual>
 			<inertial>
 				<origin xyz="0 0 ${head_height / 2}" rpy="0 0 0"/>
 				<mass value="${head_mass}"/>
-				<xacro:box_inertia m="${head_mass}" x="${head_width}" y="${head_height}" z="${head_length}"/>
+				<xacro:box_inertia m="${head_mass}" x="${head_width}" y="${head_length}" z="${head_height}"/>
 			</inertial>
 		</link>
 
@@ -66,7 +66,7 @@
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-					<mesh filename="package://stevie_description/meshes/visual/upper_screen.stl" scale="0.001001 0.001001 0.001001"/>
+					<box size="0.001 0.18 0.14"/>
 				</geometry>
 			</visual>
 			<inertial>
@@ -77,12 +77,12 @@
 		</link>
 
 		<gazebo reference="upper_screen_link">
-			<material>Gazebo/Black</material>
+			<xacro:eyes/>
 		</gazebo>
 
 		<!-- upper_screen joint -->
 		<joint name="upper_screen_joint" type="fixed">
-			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<origin xyz="0.11128992 0 0.18088210" rpy="0 -0.31 0"/>
 			<parent link="head_link"/>
 			<child link="upper_screen_link"/>
 		</joint>
@@ -92,7 +92,7 @@
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-					<mesh filename="package://stevie_description/meshes/visual/lower_screen.stl" scale="0.001001 0.001001 0.001001"/>
+					<box size="0.001 0.14 0.11"/>
 				</geometry>
 			</visual>
 			<inertial>
@@ -103,12 +103,12 @@
 		</link>
 
 		<gazebo reference="lower_screen_link">
-			<material>Gazebo/Black</material>
+			<xacro:mouth/>
 		</gazebo>
 
 		<!-- lower_screen joint -->
 		<joint name="lower_screen_joint" type="fixed">
-			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<origin xyz="0.11499191 0 0.04708293" rpy="0 0.3 0"/>
 			<parent link="head_link"/>
 			<child link="lower_screen_link"/>
 		</joint>

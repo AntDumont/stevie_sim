@@ -6,6 +6,7 @@
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
+  <arg name="verbose" default="false"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -15,8 +16,10 @@
     <arg name="paused" value="$(arg paused)"/>
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
     <arg name="headless" value="$(arg headless)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
   </include>
 
+  <env name="GAZEBO_MODEL_PATH" value="$(find stevie_control)"/>
 
   <group ns="stevie">
 
@@ -30,7 +33,7 @@
     <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
   	args="-urdf -model stevie -param robot_description
-          -x 0 -y 0 -z 0.1
+          -x 0 -y 0 -z 0.11
           -J lower_body_hip_joint 0.0
           -J hip_upper_body_joint 0.0
           -J upper_body_shoulder_left_joint 0.0

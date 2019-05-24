@@ -13,7 +13,15 @@
   <xacro:macro name="box_inertia" params="m x y z">
     <inertia  ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0"
               iyy="${m*(x*x+z*z)/12}" iyz="0"
-              izz="${m*(x*x+z*z)/12}"
+              izz="${m*(x*x+y*y)/12}"
+    />
+  </xacro:macro>
+
+  <!-- compute the inertia of a sphere -->
+  <xacro:macro name="sphere_inertia" params="m r">
+    <inertia  ixx="${2*m*r*r/5}" ixy="0" ixz="0"
+              iyy="${2*m*r*r/5}" iyz="0"
+              izz="${2*m*r*r/5}"
     />
   </xacro:macro>
 
@@ -23,6 +31,21 @@
 	    iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
 	    izz="${m*r*r/2}"
 	  />
+	</xacro:macro>
+
+  <!-- creates a counterweight to move the center of mass of a link -->
+	<xacro:macro name="counterweight" params="parent m x y z">
+    <link name="${parent}_counterweight_link">
+			<inertial>
+				<mass value="${m}"/>
+				<inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+			</inertial>
+		</link>
+    <joint name="${parent}_counterweight_joint" type="fixed">
+			<origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
+			<parent link="${parent}"/>
+			<child link="${parent}_counterweight_link"/>
+		</joint>
 	</xacro:macro>
 
 </robot>

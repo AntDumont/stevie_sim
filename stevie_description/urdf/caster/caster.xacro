@@ -14,15 +14,6 @@
 
 	<xacro:property name="PI" value="3.14159"/>
 
-	<!--**************   MOMENT OF INERTIA OF A SPHERE   **************-->
-	<xacro:macro name="sphere_inertia" params="m r">
-    <inertia  ixx="${2*m*r*r/5}" ixy="0" ixz="0"
-              iyy="${2*m*r*r/5}" iyz="0"
-              izz="${2*m*r*r/5}"
-    />
-  </xacro:macro>
-	<!--***************************************************************-->
-
 	<!--************************        CASTER          ************************-->
   <xacro:macro name="caster" params="parent" >
 
@@ -50,7 +41,6 @@
 		<gazebo reference="caster_link">
 			<mu1>0.0</mu1>
 			<mu2>0.0</mu2>
-			<maxVel>0</maxVel>
 			<material>Gazebo/Black</material>
 		</gazebo>
 

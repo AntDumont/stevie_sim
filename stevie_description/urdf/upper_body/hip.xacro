@@ -4,7 +4,7 @@
 	<xacro:include filename="$(find stevie_description)/urdf/upper_body/upper_body.transmission.xacro" />
 
 	<!-- DECLARE VARIABLES -->
-	<xacro:property name="hip_mass" value="0.1"/>
+	<xacro:property name="hip_mass" value="0.5"/>
 	<xacro:property name="hip_volume" value="0.001004"/>
 	<xacro:property name="hip_length" value="0.320"/>
 	<xacro:property name="hip_width" value="0.095"/>
@@ -30,9 +30,9 @@
 			</collision>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
-					<geometry>
-				 		<mesh filename="package://stevie_description/meshes/visual/hip_upper.stl" scale="0.001 0.001 0.001"/>
-					</geometry>
+				<geometry>
+			 		<mesh filename="package://stevie_description/meshes/visual/hip_upper.stl" scale="0.001 0.001 0.001"/>
+				</geometry>
 			</visual>
 			<inertial>
 				<origin xyz="${hip_center_of_mass}" rpy="0 0 0"/>
@@ -47,7 +47,6 @@
 			<maxVel>0</maxVel>
 			<material>Gazebo/White</material>
 		</gazebo>
-
 
 		<!-- lower_body-hip joint -->
 		<joint name="lower_body_hip_joint" type="revolute">

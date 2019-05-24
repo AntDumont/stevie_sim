@@ -40,10 +40,10 @@
 		<gazebo reference="wheel_${side}_link">
 			<mu1>1.0</mu1>
 			<mu2>1.0</mu2>
-			<kp value="10000000.0"/>
-      <kd value="1.0"/>
-      <fdir1 value="1 0 0"/>
-			<maxVel>0</maxVel>
+			<!--kp value="10000000.0"/>
+      <kd value="100.0"/>
+			<minDepth>0.001</minDepth>
+			<maxVel>1.0</maxVel-->
 			<material>Gazebo/Black</material>
 		</gazebo>
 
@@ -60,7 +60,7 @@
 			<parent link="${parent}"/>
 			<child link="wheel_${side}_link"/>
       <limit effort="100" velocity="100"/>
-      <dynamics damping="0.0" friction="0.5"/>
+      <dynamics damping="1.0" friction="0.5"/>
 		</joint>
 
 		<!-- transmission -->

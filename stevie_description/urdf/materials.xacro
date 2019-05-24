@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="eyes">
+    <visual>
+      <material>
+        <script>
+          <uri>model://materials/scripts/eyes.material</uri>
+          <uri>model://materials/textures/stevie_eyes.png</uri>
+          <name>EyesTexture</name>
+        </script>
+      </material>
+    </visual>
+  </xacro:macro>
+
+  <xacro:macro name="mouth">
+    <visual>
+      <material>
+        <script>
+          <uri>model://materials/scripts/mouth.material</uri>
+          <uri>model://materials/textures/stevie_mouth.png</uri>
+          <name>MouthTexture</name>
+        </script>
+      </material>
+    </visual>
+  </xacro:macro>
+
+</robot>

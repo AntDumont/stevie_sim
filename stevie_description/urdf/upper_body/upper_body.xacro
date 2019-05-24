@@ -6,7 +6,7 @@
 	<xacro:include filename="$(find stevie_description)/urdf/upper_body/hip.xacro" />
 
 	<!-- DECLARE VARIABLES -->
-	<xacro:property name="upper_body_mass" value="8"/>
+	<xacro:property name="upper_body_mass" value="0.8"/>
 	<xacro:property name="upper_body_volume" value="0.010712"/>
 	<xacro:property name="upper_body_length" value="0.347374786"/>
 	<xacro:property name="upper_body_width" value="0.283975830"/>
@@ -34,9 +34,11 @@
 				</geometry>
 			</visual>
 			<inertial>
-				<origin xyz="${upper_body_center_of_mass}" rpy="0 0 0"/>
+				<!--origin xyz="${upper_body_center_of_mass}" rpy="0 0 0"/-->
+				<origin xyz="0 0 ${upper_body_height/2}" rpy="0 0 0"/>
 				<mass value="${upper_body_mass}"/>
-				<xacro:scale_inertia m="${upper_body_mass}" v="${upper_body_volume}" ixx="0.0001825920" ixy="0" ixz="0" iyy="0.0001372321" iyz="0" izz="0.0001830431"/>
+				<!--xacro:scale_inertia m="${upper_body_mass}" v="${upper_body_volume}" ixx="0.0001825920" ixy="0" ixz="0" iyy="0.0001372321" iyz="0" izz="0.0001830431"/-->
+				<xacro:box_inertia m="${upper_body_mass}" x="${upper_body_width}" y="${upper_body_length}" z="${upper_body_height}"/>
 			</inertial>
 		</link>
 
@@ -57,7 +59,7 @@
 			<limit lower="${-PI/4}" upper="${PI/4}" effort="1000.0" velocity="0.5"/>
 			<parent link="hip_link"/>
 			<child link="${name}_link"/>
-      <dynamics damping="10" friction="1.5"/>
+      <dynamics damping="100" friction="0.5"/>
 		</joint>
 
 		<!-- transmission -->

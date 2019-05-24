@@ -1,0 +1,13 @@
+material EyesTexture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture stevie_eyes.png
+      }
+    }
+  }
+}

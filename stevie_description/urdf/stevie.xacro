@@ -17,6 +17,7 @@
 
   <!-- DEPENDENCIES -->
   <xacro:include filename="$(find stevie_description)/urdf/macros.xacro" />
+  <xacro:include filename="$(find stevie_description)/urdf/materials.xacro" />
   <xacro:include filename="$(find stevie_description)/urdf/stevie.gazebo"/>
   <xacro:include filename="$(find stevie_description)/urdf/sensors/sensor_macros.xacro"/>
 
