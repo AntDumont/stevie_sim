@@ -9,15 +9,8 @@
     type="spawner" respawn="false"
     output="screen"
     args="joint_state_controller
-      mobile_base_controller
-      hip_position_controller
-      upperBody_position_controller
-      leftShoulder_position_controller
-      rightShoulder_position_controller
-      leftArm_position_controller
-      rightArm_position_controller
-      neck_position_controller
-      head_position_controller"
+      leftWheel_effort_controller
+      rightWheel_effort_controller"
   />
 
   <!-- convert joint states to TF transforms for rviz, etc -->
