@@ -14,8 +14,8 @@
 	<xacro:property name="lower_body_width" value="0.516555"/>
 	<xacro:property name="lower_body_height" value="0.475"/>
 
-	<!--xacro:property name="lower_body_center_of_mass" value="-0.112043 0.000001 0.051805"/-->
-	<xacro:property name="lower_body_center_of_mass" value="-0.212043 0.000001 0"/>
+	<xacro:property name="lower_body_center_of_mass" value="-0.112043 0.000001 0.051805"/>
+	<!--xacro:property name="lower_body_center_of_mass" value="-0.212043 0.000001 0"/-->
 
 	<xacro:property name="PI" value="3.14159"/>
 

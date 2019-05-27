@@ -19,7 +19,7 @@
     <arg name="verbose" value="$(arg verbose)"/>
   </include>
 
-  <env name="GAZEBO_MODEL_PATH" value="$(find stevie_control)"/>
+  <env name="GAZEBO_MODEL_PATH" value="$(find stevie_description)"/>
 
   <group ns="stevie">
 
