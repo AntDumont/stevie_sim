@@ -23,7 +23,7 @@
   <xacro:macro name="lower_body" params="name" >
 
 		<!-- base link -->
-		<link name="${name}_footprint"/>
+		<link name="base_link"/>
 
 		<!-- lower body link -->
 		<link name="${name}_link">
@@ -56,7 +56,7 @@
 		<!-- footprint-lower_body joint -->
 		<joint name="${name}_footprint_joint" type="fixed">
 			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<parent link="${name}_footprint"/>
+			<parent link="base_link"/>
 			<child link="${name}_link"/>
 		</joint>
 
