@@ -1,0 +1,28 @@
+<launch>
+  <param name="robot_description"
+    command="$(find xacro)/xacro --inorder '$(find stevie_description)/urdf/stevie.xacro'" />
+
+  <!-- send fake joint values -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="TRUE"/>
+  </node>
+
+  <!-- Combine joint values -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+
+  <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen">
+    <param name="destination_frame" value="/base_link"/>
+    <param name="cloud_destination_topic" value="/merged_cloud"/>
+    <param name="scan_destination_topic" value="/stevie/scan_multi"/>
+    <param name="laserscan_topics" value="/stevie/front_laser/scan /stevie/back_laser/scan"/>
+    <param name="angle_min" value="-3.14"/>
+    <param name="angle_max" value="3.14"/>
+  </node>
+
+  <!-- Create the map from laser messages -->
+  <node name="gmapping" pkg="gmapping" type="slam_gmapping" args="scan:=/stevie/scan_multi"/>
+
+  <!-- Show in Rviz   -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find stevie_description)/launch/mapping.rviz"/>
+
+</launch>
