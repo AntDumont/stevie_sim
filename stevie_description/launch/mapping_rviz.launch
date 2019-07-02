@@ -10,6 +10,7 @@
   <!-- Combine joint values -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
 
+  <!-- Merge the data of the two lasers in one topic -->
   <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen">
     <param name="destination_frame" value="/base_link"/>
     <param name="cloud_destination_topic" value="/merged_cloud"/>

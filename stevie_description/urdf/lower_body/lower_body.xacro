@@ -30,13 +30,15 @@
 			<collision>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-					<mesh filename="package://stevie_description/meshes/collision/lower_body_collision.stl" scale="0.001 0.001 0.001"/>
+					<!-- <mesh filename="package://stevie_description/meshes/collision/lower_body_collision.stl" scale="0.001 0.001 0.001"/> -->
+					<mesh filename="$(find stevie_description)/meshes/collision/lower_body_collision.stl" scale="0.001 0.001 0.001"/>
 				</geometry>
 			</collision>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 					<geometry>
-				 		<mesh filename="package://stevie_description/meshes/visual/lower_body.stl" scale="0.001 0.001 0.001"/>
+				 		<!-- <mesh filename="package://stevie_description/meshes/visual/lower_body.stl" scale="0.001 0.001 0.001"/> -->
+				 		<mesh filename="$(find stevie_description)/meshes/visual/lower_body.stl" scale="0.001 0.001 0.001"/>
 					</geometry>
 			</visual>
 			<inertial>

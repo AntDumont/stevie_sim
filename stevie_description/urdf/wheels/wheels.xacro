@@ -27,7 +27,8 @@
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-					<mesh filename="package://stevie_description/meshes/visual/wheel.stl" scale="0.001 0.001 0.001"/>
+					<!-- <mesh filename="package://stevie_description/meshes/visual/wheel.stl" scale="0.001 0.001 0.001"/> -->
+					<mesh filename="$(find stevie_description)/meshes/visual/wheel.stl" scale="0.001 0.001 0.001"/>
 				</geometry>
 			</visual>
 			<inertial>
@@ -38,8 +39,8 @@
 		</link>
 
 		<gazebo reference="wheel_${side}_link">
-			<mu1>1.0</mu1>
-			<mu2>1.0</mu2>
+			<mu1>100.0</mu1>
+			<mu2>50.0</mu2>
 			<!--kp value="10000000.0"/>
       <kd value="100.0"/>
 			<minDepth>0.001</minDepth>
@@ -73,7 +74,8 @@
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
 					<!-- slightly larger scale so the yellow cap can cover the one already on the wheel mesh -->
-					<mesh filename="package://stevie_description/meshes/visual/wheel_cap.stl" scale="0.001001 0.001001 0.001001"/>
+					<!-- <mesh filename="package://stevie_description/meshes/visual/wheel_cap.stl" scale="0.001001 0.001001 0.001001"/> -->
+					<mesh filename="$(find stevie_description)/meshes/visual/wheel_cap.stl" scale="0.001001 0.001001 0.001001"/>
 				</geometry>
 			</visual>
 			<inertial>
