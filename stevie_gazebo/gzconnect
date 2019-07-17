@@ -9,16 +9,26 @@ then
 else
   if [ "$#" -eq 0 ]
   then
-    SERVER_ADDR="$(arp -a | grep -i 'rail' | awk '{print $2}' | sed 's/^.\(.*\).$/\1/')";
+    SERVER_ADDR="$(arp -a | grep -i 'rail' | grep $INTERFACE_NAME | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')";
     CLIENT_ADDR="$(ifconfig $INTERFACE_NAME | grep 'inet ' | awk '{print $2}')"
   else
     echo "Usage:
       gzsetup
       gzsetup [client IP] [server IP]";
-    exit 1
   fi
 fi
 
-export ROS_IP="$CLIENT_ADDR"
-export ROS_MASTER_URI="http://$CLIENT_ADDR:11311"
-export GAZEBO_MASTER_URI="http://$SERVER_ADDR:11345"
+if [ -z "$SERVER_ADDR" ] || [ -z "$CLIENT_ADDR" ]
+then
+  if [ -z "$SERVER_ADDR" ]
+  then
+    echo -e "\e[31mError: no server address\e[0m"
+  else
+    echo -e "\e[31mError: no client address\e[0m"
+  fi
+else
+  export ROS_IP="$CLIENT_ADDR"
+  export ROS_MASTER_URI="http://$CLIENT_ADDR:11311"
+  export GAZEBO_MASTER_URI="http://$SERVER_ADDR:11345"
+  echo "Done"
+fi

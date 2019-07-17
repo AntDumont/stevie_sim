@@ -62,7 +62,7 @@
         <cameraName>${front_right_camera_name}</cameraName>
         <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>${front_right_camera_name}</frameName>
+        <frameName>${front_right_camera_name}_link</frameName>
         <hackBaseLine>0.07</hackBaseLine>
         <distorsionK1>0.0</distorsionK1>
         <distorsionK2>0.0</distorsionK2>
@@ -94,7 +94,7 @@
         <cameraName>${back_camera_name}</cameraName>
         <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>${back_camera_name}</frameName>
+        <frameName>${back_camera_name}_link</frameName>
         <hackBaseLine>0.07</hackBaseLine>
         <distorsionK1>0.0</distorsionK1>
         <distorsionK2>0.0</distorsionK2>
@@ -126,7 +126,7 @@
         <cameraName>${top_camera_name}</cameraName>
         <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>${top_camera_name}</frameName>
+        <frameName>${top_camera_name}_link</frameName>
         <hackBaseLine>0.07</hackBaseLine>
         <distorsionK1>0.0</distorsionK1>
         <distorsionK2>0.0</distorsionK2>
